@@ -1,0 +1,49 @@
+plugins {
+  id 'java'
+  id 'idea'
+  id 'eclipse'
+  id 'application'
+  id 'maven'
+  id 'maven-publish'
+  id "com.jfrog.bintray" version "1.8.4"
+  id 'com.github.johnrengelman.shadow' version '4.0.3'
+  }
+  
+processResources {
+  from('src/test/resources') { include '**/*.json' }
+}
+
+group = 'com.frogfront'
+version = '0.0.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile(
+    	[group: 'com.google.guava', name: 'guava', version: '24.0-jre'],
+    	[group: 'com.frogfront', name: 'web-crawler', version: '0.0.1'],
+    	[group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.13'],
+    	
+    	)
+
+    testCompile(
+    	[group: 'junit', name: 'junit', version: '4.12'],
+      )
+}
+
+mainClassName = 'org.cjwilson.webcrawler.App'
+
+shadowJar {
+  mergeServiceFiles()
+  classifier = ''
+}
+
+
+defaultTasks 'clean', 'build', 'shadowJar'
