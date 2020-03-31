@@ -20,12 +20,21 @@ The first is to use gradle to run the project with its internal `JavaExec` comma
 
 ```bash
 $> gradle run --args='-l https://wiprodigital.com/ -f output.txt'
+
+Building report for https://wiprodigital.com/
+processing of https://wiprodigital.com/ took 9 seconds
+output file located at -> output.txt
+
 ```
 
 The second method is to invoke it with the `java -jar` command. During the initial build [Shadow Jar](https://github.com/johnrengelman/shadow) is invoked creating a Fat jar.
 
 ```bash
 $> java -jar build/libs/web-crawler-cli-0.0.1.jar -l https://wiprodigital.com/ -f output.txt
+
+Building report for https://wiprodigital.com/
+processing of https://wiprodigital.com/ took 9 seconds
+output file located at -> output.txt
 
 ```
 
