@@ -12,9 +12,8 @@ BUILD SUCCESSFUL in 17s
 6 actionable tasks: 6 executed
 ```
 
-
 ### Running
-The application can be run by invoking two different methods.
+From the command line the application can be run by invoking two different methods.
 
 The first is to use gradle to run the project with its internal `JavaExec` command. This is invoked as follows.
 
@@ -37,7 +36,22 @@ processing of https://wiprodigital.com/ took 9 seconds
 output file located at -> output.txt
 
 ```
+### Running in Docker
+If you don't want to build locally from source you can use the runnable [Docker](https://www.docker.com/) image. Before doing so you will have to have Docker [installed](https://docs.docker.com/install/).
+
+The following command will execute the latest docker image and write the output to your current directory.
+
+```bash
+$> docker run -e "crawl_url=https://wiprodigital.com/" -v $(pwd):/app/out cuzz22000/web-crawler-cli
+```
+
+### Building Docker
+The following is the build command for the docker image. It will install the latest `.jar` file located in you `build/libs` directory. You will have to substitute your docker repositoy name.
+
+```bash
+$> docker build -t ${your_repo}/web-crawler-cli:latest .
+```
 
 ### Future Plans
   - Implement a more robust CLI. Currently the arguments have to be ordered.. not nice!
-  - Dockerize!! Runnning the application from a docker container and have it available via HUB would be pretty cool.
+  - ~~ Dockerize!! Runnning the application from a docker container and have it available via HUB would be pretty cool. ~~
