@@ -54,4 +54,4 @@ $> docker build -t ${your_repo}/web-crawler-cli:latest .
 
 ### Future Plans
   - Implement a more robust CLI. Currently the arguments have to be ordered.. not nice!
-  - ~~ Dockerize!! Runnning the application from a docker container and have it available via HUB would be pretty cool. ~~
+  - ~~Dockerize!! Runnning the application from a docker container and have it available via HUB would be pretty cool.~~
