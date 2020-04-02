@@ -9,12 +9,8 @@ plugins {
   id 'com.github.johnrengelman.shadow' version '4.0.3'
   }
   
-processResources {
-  from('src/test/resources') { include '**/*.json' }
-}
-
 group = 'com.frogfront'
-version = '0.0.1'
+version = applicationVersion
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,7 +24,7 @@ repositories {
 dependencies {
     compile(
     	[group: 'com.google.guava', name: 'guava', version: '24.0-jre'],
-    	[group: 'com.frogfront', name: 'web-crawler', version: '0.0.1'],
+    	[group: 'com.frogfront', name: 'web-crawler', version: webCrawlerVersion],
     	[group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.13'],
     	
     	)
