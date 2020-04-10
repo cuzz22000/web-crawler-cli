@@ -18,7 +18,9 @@ targetCompatibility = 1.8
 repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
+    maven {
+        url 'https://dl.bintray.com/frog-front/com.frogfront/'
+    }
 }
 
 dependencies {
