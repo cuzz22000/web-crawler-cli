@@ -1,0 +1,37 @@
+language: java
+services:
+  - docker
+install: true
+
+env:
+  global:
+    - IMAGE_NAME=cuzz22000/web-crawler-cli
+
+jdk:
+  - openjdk8
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+  
+script: 
+  - ./gradlew
+  
+deploy:
+  provider: script 
+  script:
+    - docker login -u="$DOCKER_USR" -p="$DOCKER_PWD"
+    - docker build -t $IMAGE_NAME:latest .
+    - docker images
+    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TRAVIS_TAG
+    - docker push $IMAGE_NAME:latest
+    - docker push $IMAGE_NAME:$TRAVIS_TAG
+  skip_cleanup: true
+  on:
+    tags: true
+    
