@@ -1,5 +1,7 @@
 ## Web Crawler CLI
 
+![alt travis](https://travis-ci.org/cuzz22000/web-crawler-cli.svg?branch=master)
+
 Web Crawler CLI is a simple command line interface implementing the [Frog Front Web Crawler Library](https://github.com/Frog-Front/web-crawler).
 
 ### Building
