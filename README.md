@@ -20,10 +20,10 @@ From the command line the application can be run by invoking two different metho
 The first is to use gradle to run the project with its internal `JavaExec` command. This is invoked as follows.
 
 ```bash
-$> gradle run --args='-l https://wiprodigital.com/ -f output.txt'
+$> gradle run --args='-l https://sample.com/ -f output.txt'
 
-Building report for https://wiprodigital.com/
-processing of https://wiprodigital.com/ took 9 seconds
+Building report for https://sample.com/
+processing of https://sample.com/ took 9 seconds
 output file located at -> output.txt
 
 ```
@@ -31,10 +31,10 @@ output file located at -> output.txt
 The second method is to invoke it with the `java -jar` command. During the initial build [Shadow Jar](https://github.com/johnrengelman/shadow) is invoked creating a Fat jar.
 
 ```bash
-$> java -jar build/libs/web-crawler-cli-0.0.1.jar -l https://wiprodigital.com/ -f output.txt
+$> java -jar build/libs/web-crawler-cli-0.0.1.jar -l https://sample.com/ -f output.txt
 
-Building report for https://wiprodigital.com/
-processing of https://wiprodigital.com/ took 9 seconds
+Building report for https://sample.com/
+processing of https://sample.com/ took 9 seconds
 output file located at -> output.txt
 
 ```
@@ -44,7 +44,7 @@ If you don't want to build locally from source you can use the runnable [Docker]
 The following command will execute the latest docker image and write the output to your current directory.
 
 ```bash
-$> docker run -e "crawl_url=https://wiprodigital.com/" -v $(pwd):/app/out cuzz22000/web-crawler-cli
+$> docker run -e "crawl_url=https://sample.com/" -v $(pwd):/app/out cuzz22000/web-crawler-cli
 ```
 
 ### Building Docker
