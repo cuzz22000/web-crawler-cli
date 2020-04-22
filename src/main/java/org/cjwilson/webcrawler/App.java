@@ -20,25 +20,25 @@ public class App {
 
 		if (args.length == 0 || args[0].equals("--help") || args[0].equals("-h")) {
 			System.out.println(usage());
-		} else if (args[0].equals("--loc") || args[0].equals("-l")&&args[2].equals("--file") || args[2].equals("-f")) {
+		} else if (args[0].equals("--loc") || args[0].equals("-l") && args[2].equals("--file")
+				|| args[2].equals("-f")) {
 			System.out.println("Building report for " + args[1]);
-			
+
 			Stopwatch stopwatch = Stopwatch.createStarted();
-			WebCrawler webCrawler = new DomainWebCrawler();
 			File outFile = new File(args[3]);
 			FileOutputStream fileOutputStream = new FileOutputStream(outFile);
 			LocationProvider locationProvider = new ReportingLocationProvider(fileOutputStream);
-			URL robostsTxtUrl = new URL(args[1].endsWith("/") ? args[1]+"robots.txt":args[1]+"/robots.txt");
+			URL robostsTxtUrl = new URL(args[1].endsWith("/") ? args[1] + "robots.txt" : args[1] + "/robots.txt");
 			RobotsTxt robotsTxt = new RobotsTxtParser(robostsTxtUrl);
-			webCrawler.useRobotstxt(robotsTxt);
-			webCrawler.useLocationProvider(locationProvider);
+			WebCrawler webCrawler = new DomainWebCrawler().useRobotstxt(robotsTxt)
+					.useLocationProvider(locationProvider);
 			webCrawler.crawlUrl(new URL(args[1]));
 			fileOutputStream.close();
 			stopwatch.stop();
 			long millis = stopwatch.elapsed(TimeUnit.SECONDS);
 
-			System.out.println("processing of "+args[1]+" took "+ millis+" seconds");
-			System.out.println("output file located at -> "+outFile.getAbsolutePath());
+			System.out.println("processing of " + args[1] + " took " + millis + " seconds");
+			System.out.println("output file located at -> " + outFile.getAbsolutePath());
 		}
 	}
 
