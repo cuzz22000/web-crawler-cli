@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cjwilson</groupId>
   <artifactId>web-crawler-cli</artifactId>
   <version>0.0.4</version>
+  <name>Web Crawler CLI</name>
+  <description>Web Crawler Coomand Line Interface</description>
+  <url>http://cjwilson.org</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>cuzz22000</id>
+      <name>chris w</name>
+      <email>info@cjwilson.org</email>
+    </developer>
+  </developers>
+  <scm>
+    <tag>head</tag>
+    <url>https://github.com/cuzz22000/web-crawler-cli</url>
+  </scm>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/cuzz22000/web-crawler-cli/issues</url>
+  </issueManagement>
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>24.0-jre</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.frogfront</groupId>
-      <artifactId>web-crawler</artifactId>
-      <version>0.1.2</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.0.13</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
+      <groupId>com.frogfront</groupId>
+      <artifactId>web-crawler</artifactId>
+      <version>0.1.2</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>
