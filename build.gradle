@@ -67,6 +67,7 @@ dependencies {
     	implementation 'com.google.guava:guava:24.0-jre'
     	implementation 'ch.qos.logback:logback-classic:1.0.13'
     	implementation 'com.frogfront:web-crawler:'+webCrawlerVersion
+    	implementation 'info.picocli:picocli:4.2.0'
 }
 
 mainClassName = 'org.cjwilson.webcrawler.App'

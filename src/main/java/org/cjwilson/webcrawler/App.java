@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import com.frogfront.webcrawler.DomainWebCrawler;
@@ -14,37 +15,46 @@ import com.frogfront.webcrawler.api.RobotsTxt;
 import com.frogfront.webcrawler.api.WebCrawler;
 import com.google.common.base.Stopwatch;
 
-public class App {
+import picocli.CommandLine;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
+
+public class App implements Callable<Integer> {
+
+	@Parameters(index = "0", description = "The base domain url to crawl ex. http://example.com")
+	private URL url;
+
+	@Option(names = { "-f", "--file" }, description = "The file to output report")
+	private File outFile = new File("output.txt");
 
 	public static void main(String[] args) throws IOException {
+		int exitCode = new CommandLine(new App()).execute(args);
+		System.exit(exitCode);
+	}
 
-		if (args.length == 0 || args[0].equals("--help") || args[0].equals("-h")) {
-			System.out.println(usage());
-		} else if (args[0].equals("--loc") || args[0].equals("-l") && args[2].equals("--file")
-				|| args[2].equals("-f")) {
-			System.out.println("Building report for " + args[1]);
-
+	@Override
+	public Integer call() {
+		System.out.println("Building report for " + this.url.toString());
+		try {
 			Stopwatch stopwatch = Stopwatch.createStarted();
-			File outFile = new File(args[3]);
 			FileOutputStream fileOutputStream = new FileOutputStream(outFile);
 			LocationProvider locationProvider = new ReportingLocationProvider(fileOutputStream);
-			URL robostsTxtUrl = new URL(args[1].endsWith("/") ? args[1] + "robots.txt" : args[1] + "/robots.txt");
+			URL robostsTxtUrl = new URL(this.url.toString().endsWith("/") ? new URL(url.toString()) + "robots.txt"
+					: new URL(url.toString()) + "/robots.txt");
 			RobotsTxt robotsTxt = new RobotsTxtParser(robostsTxtUrl);
 			WebCrawler webCrawler = new DomainWebCrawler().useRobotstxt(robotsTxt)
 					.useLocationProvider(locationProvider);
-			webCrawler.crawlUrl(new URL(args[1]));
+			webCrawler.crawlUrl(this.url);
 			fileOutputStream.close();
 			stopwatch.stop();
 			long millis = stopwatch.elapsed(TimeUnit.SECONDS);
 
-			System.out.println("processing of " + args[1] + " took " + millis + " seconds");
+			System.out.println("processing of " + this.url.toString() + " took " + millis + " seconds");
 			System.out.println("output file located at -> " + outFile.getAbsolutePath());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			return 1;
 		}
-	}
-
-	private static String usage() {
-		return new StringBuilder("Usage:\n").append("\t-h , --help : this munu\n")
-				.append("\t-l , --loc : url location of site\n").append("\t-f , --file: output file location\n")
-				.toString();
+		return 0;
 	}
 }
